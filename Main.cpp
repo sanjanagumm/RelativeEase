@@ -7,12 +7,13 @@
 #include <cppconn/prepared_statement.h>
 #include "FileConverter.h"
 #include "DataProcessor.h"
+#include "GradeAdjuster.h"
 #include "ReportGenerator.h"
 #include <mysql_driver.h>
 
 // Function to execute SQL script
 void executeScript(sql::Connection* con, const std::string& filename) {
-    std::ifstream file(filename);
+    std::ifstream file("SQLScript.sql");
     if (!file.is_open()) {
         std::cerr << "Error: Could not open SQL script file." << std::endl;
         return;
@@ -49,16 +50,38 @@ int main() {
 
         // Use FileConverter to convert InputFile.csv to database
         FileConverter converter;
-        converter.convertCSVtoDatabase("InputFile.csv");
+        converter.convertCSVtoDatabase("InputFile2.csv");
 
         // Use DataProcessor to perform relative grading
         DataProcessor processor;
         processor.calculateGrades();
 
+        // Use GradeAdjuster to display table by grade and adjust grades
+        GradeAdjuster adjuster;
+        adjuster.displayTableByGrade();
+
+        // Prompt user to adjust grades
+        char choice;
+        do {
+            double targetMark;
+            char targetGrade;
+            std::cout << "Do you want to adjust grades? (y/n): ";
+            std::cin >> choice;
+            if (choice == 'y') {
+                std::cout << "Enter target mark: ";
+                std::cin >> targetMark;
+                std::cout << "Enter target grade: ";
+                std::cin >> targetGrade;
+                adjuster.adjustStudentGrade(targetMark, targetGrade);
+                adjuster.displayTableByGrade();
+            }
+        } while (choice == 'y');
+
         // Use ReportGenerator to generate report and write to OutputFile.csv
         ReportGenerator reportGenerator;
         reportGenerator.generateReport();
-        reportGenerator.writeCSVFile("OutputFile.csv");
+        reportGenerator.writeCSVFile("OutputFile2.csv");
+
 
         delete con;
     }

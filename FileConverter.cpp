@@ -18,7 +18,7 @@ void FileConverter::convertCSVtoDatabase(const std::string& filename) {
         con = driver->connect("tcp://127.0.0.1:3306", "root", "gumm");
         con->setSchema("gumm_schema");
 
-        std::ifstream file("InputFile.csv");
+        std::ifstream file("InputFile2.csv");
         if (!file.is_open()) {
             std::cerr << "Error: Could not open file. (fileConverter)" << std::endl;
             return;
@@ -34,7 +34,7 @@ void FileConverter::convertCSVtoDatabase(const std::string& filename) {
             }
 
             // Assuming table structure: (StudentID INT, Name VARCHAR(255), Assessment1 FLOAT, Assessment2 FLOAT, Assignment FLOAT, Total FLOAT)
-            std::string query = "INSERT INTO Marks (StudentID, Name, Assessment1, Assessment2, Assignment, Endsem, Total) VALUES ('"
+            std::string query = "INSERT INTO Marks2 (StudentID, Name, Assessment1, Assessment2, Assignment, Endsem, Total) VALUES ('"
                 + tokens[0] + "', '" + tokens[1] + "', '" + tokens[2] + "', '" + tokens[3] + "', '"
                 + tokens[4] + "', '" + tokens[5] + "', '" + tokens[6] + "')";
 

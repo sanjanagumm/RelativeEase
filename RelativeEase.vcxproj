@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="DataProcessor.h" />
     <ClInclude Include="FileConverter.h" />
+    <ClInclude Include="GradeAdjuster.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="ReportGenerator.h" />
     <ClInclude Include="resource.h" />
@@ -128,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="DataProcessor.cpp" />
     <ClCompile Include="FileConverter.cpp" />
+    <ClCompile Include="GradeAdjuster.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ReportGenerator.cpp" />

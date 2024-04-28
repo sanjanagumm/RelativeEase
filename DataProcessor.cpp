@@ -18,7 +18,7 @@ void DataProcessor::calculateGrades() {
         con->setSchema("gumm_schema");
 
         // Retrieve data from Marks table
-        std::string query = "SELECT * FROM Marks";
+        std::string query = "SELECT * FROM Marks2";
         stmt = con->createStatement();
         res = stmt->executeQuery(query);
 
@@ -73,7 +73,7 @@ void DataProcessor::calculateGrades() {
 
             // Update Grade column in database
             int studentID = res->getInt("StudentID");
-            std::string updateQuery = "UPDATE Marks SET Grade = '" + std::string(1, grade) + "' WHERE StudentID = " + std::to_string(studentID);
+            std::string updateQuery = "UPDATE Marks2 SET Grade = '" + std::string(1, grade) + "' WHERE StudentID = " + std::to_string(studentID);
             stmt->executeUpdate(updateQuery);
         }
 

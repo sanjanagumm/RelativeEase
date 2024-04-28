@@ -18,7 +18,8 @@ void ReportGenerator::generateReport() {
         con->setSchema("gumm_schema");
 
         // Generate report (pseudo code)
-        std::string query = "SELECT Grade, COUNT(*) AS Count FROM Marks GROUP BY Grade";
+        std::string query = "SELECT Grade, COUNT(*) AS Count FROM Marks2 GROUP BY Grade ORDER BY Grade ASC";
+
         stmt = con->createStatement();
         res = stmt->executeQuery(query);
 
@@ -48,12 +49,12 @@ void ReportGenerator::writeCSVFile(const std::string& filename) {
         con->setSchema("gumm_schema");
 
         // Fetch data from Marks table
-        std::string query = "SELECT * FROM Marks";
+        std::string query = "SELECT * FROM Marks2";
         stmt = con->createStatement();
         res = stmt->executeQuery(query);
 
         // Open CSV file
-        std::ofstream outfile("OutputFile.csv");
+        std::ofstream outfile("OutputFile2.csv");
         if (!outfile.is_open()) {
             std::cerr << "Error: Could not open file. (reportGenerator)" << std::endl;
             return;
